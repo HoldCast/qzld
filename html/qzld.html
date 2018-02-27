@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<head>
+    <title>云南公安指挥调度平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="公安指挥调度"/>
+    <link rel="icon" href="../images/favicon.ico">
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Custom CSS -->
+    <link href="../assets/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="../assets/css/style-responsive.css" rel="stylesheet"/>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="../assets/css/font.css" type="text/css"/>
+    <link href="../assets/css/font-awesome.css" rel="stylesheet">
+    <!-- self -->
+    <link rel="stylesheet" href="../css/common.css?v=1.0">
+    <link rel="stylesheet" href="../css/qzld.css?v=1.0">
+</head>
+<body style="background:#f9f9f9;">
+<section id="container">
+    <!--顶部-->
+    <header class="header fixed-top clearfix" id="commonHeader"></header>
+    <!--左边菜单-->
+    <aside>
+        <div id="sidebar" class="nav-collapse">
+            <div class="leftside-navigation">
+                <ul class="sidebar-menu" id="nav-accordion"></ul>
+            </div>
+        </div>
+    </aside>
+    <!--右边内容-->
+    <section id="main-content">
+        <section class="wrapper" id="wrapper">
+            <!--<h3 class="main-title" id="mainTitle">情指联动</h3>-->
+            <div>
+                <div class="col-sm-5 m-b-xs">
+                    <button id="addRdjjfz" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addAsjModal">
+                        <i class="icon-plus"></i> 新增
+                    </button>
+                </div>
+                <div class="col-sm-4 text-left">
+
+                </div>
+                <div class="col-sm-3">
+                </div>
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>任务性质</th>
+                        <th>阶段</th>
+                        <th>标题</th>
+                        <th>案发时间</th>
+                        <th>发起单位</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody id="ajsTbody"></tbody>
+                </table>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-5 text-center">
+                        <small class="text-muted inline m-t-sm m-b-sm">
+                            显示 1 到 10 条数据，总共 31 条。
+                        </small>
+                    </div>
+                    <div class="col-sm-7 text-right text-center-xs">
+                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                            <li><a href="">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li>
+                            <li><a href="">4</a></li>
+                            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </section>
+</section>
+
+<!-- 新增案事件 -->
+<div class="modal fade bs-example-modal-lg" id="addAsjModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:600px;">
+        <form class="modal-content" id="addAsjForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">
+                    <i class="icon-plus"></i>
+                    新增案事件
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group clearfix modal-form type1">
+                        <div class="form-item1 pull-left">
+                            <span class="pre">任务类型</span>
+                            <select style="width:400px;" name="rwlx" value="分析任务">
+                                <option value="分析任务">分析任务</option>
+                                <option value="执行任务">执行任务</option>
+                            </select>
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">任务阶段</span>
+                            <select style="width:400px;" name="rwjd" value="关注">
+                                <option value="关注">关注</option>
+                                <option value="执行">执行</option>
+                            </select>
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">任务标题</span>
+                            <input type="text" style="width:400px;" name="rwbt" value="昆明入室盗窃分析">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">创建时间</span>
+                            <input type="text" value="2018-03-06" style="width:400px;" name="cjsj" class="form_date">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">发起单位</span>
+                            <input type="text" value="云南省公安厅" style="width:400px;" name="fqdw">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">任务描述</span>
+                            <textarea name="rwms" id="" style="width:400px;height:100px;">近期我市入室盗窃频发，特点是使用快速开锁技术，门框无损坏，门锁功能正常，受害人只有发现财物损失或家里物品被翻动后才察觉，隐蔽性高，怀疑是一个具有开锁技术的团伙作案，需要各单位配合检查是否有类似线索
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="tips" id="tips"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="addAjsBtn">确定</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 指挥：下达指令 -->
+<div class="modal fade bs-example-modal-lg" id="zhModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:1100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">
+                    <i class=" icon-flag"></i>
+                    指挥:下达一级指令
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix handle">
+                    <!--左边文字信息-->
+                    <div class="pull-left left-content">
+                        <div class="item">任务标题：<span id="zhRwbt"></span></div>
+                        <div class="item">创建时间：<span id="zhCjsj"></span></div>
+                        <div class="item">任务内容：<span id="zhRwms"></span></div>
+                        <div class="item dqczdw">当前处置单位：<b id="zhDqczdw">昆明市局指挥中心</b></div>
+                    </div>
+                    <!--右边操作-->
+                   <div class="pull-left right-content">
+                       <div class="panel-item">
+                           <div class="title">
+                               <label>
+                                   <input type="checkbox">
+                                   <span>区县公安机关</span>
+                               </label>
+                           </div>
+                           <div class="content clearfix">
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>五华分局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>西山分局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>宜良县局</span>
+                               </label>
+                               <label class="pull-left item">
+                                   <input type="checkbox">
+                                   <span>昆明两区分局</span>
+                               </label>
+                           </div>
+                       </div>
+                       <div class="panel-item">
+                           <div class="form-group modal-form type1">
+                               <div class="form-item1">
+                                   <span class="pre">协作标题</span>
+                                   <input type="text" value="" style="width:550px;" name="xzbt">
+                               </div>
+                               <div class="form-item1">
+                                   <span class="pre">协作要求</span>
+                                   <textarea name="xzyq"  style="width:550px;height:80px;"></textarea>
+                               </div>
+                               <div class="form-item1">
+                                   <span class="pre">相关附件</span>
+                                   <input type="file" multiple style="width:550px;background: #fff;display:inline;" name="xgfj">
+                                   <button class="btn btn-primary btn-sm" style="margin-left:15px;">生成默认指令</button>
+                               </div>
+
+                           </div>
+                       </div>
+                       <div class="panel-item">
+                           <div class="form-group modal-form">
+                               <div class="form-item1">
+                                   <textarea name="zlnr"  style="width:645px;height:120px;"></textarea>
+                                   <button class="btn btn-danger btn-sm" style="position:relative;top:-10px;text-align:center;margin-left:15px;width:90px">下达指令</button>
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer"></div>
+</body>
+<script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
+<script src="../js/menu-config.js?v=1.0"></script>
+<script src="../js/function.js?v=1.0"></script>
+<script src="../js/common2.js?v=1.0"></script>
+<script src="../assets/bootstrap/bootstrap.js"></script>
+<script src="../assets/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="../assets/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../assets/bootstrap/jquery.dcjqaccordion.2.7.js"></script>
+<script src="../assets/bootstrap/jquery.scrollTo.js"></script>
+<script src="../assets/bootstrap/scripts.js"></script>
+<script src="../assets/bootstrap/jquery.slimscroll.js"></script>
+<script src="../assets/bootstrap/jquery.nicescroll.js"></script>
+<script src="../assets/bootstrap/raphael-min.js"></script>
+<script src="../assets/bootstrap/morris.js"></script>
+<script>
+    //表格数据
+    var tabelData = {};
+
+    //初始化表格
+    initTableData(JSON.parse(localStorage.getItem('qzldData')));
+
+    //新增
+    $('#addAjsBtn').off('click').on('click',function () {
+        var dataId = 'id_' + (new Date()).getTime();
+        var formData = $('#addAsjForm').serializeArray();
+        var isFull = true;
+        var trHtml = '<tr>';
+        var trData = {};
+        $.each(formData, function() {
+            var val = this.value;
+            var name = this.name;
+            trData[name] = val;
+            if(val){
+                if(name == 'rwms'){
+                    trHtml += '';
+                }else{
+                    trHtml += '<td>'+val+'</td>';
+                }
+            }else{
+                $('#tips').text('请完整填写案事件信息!');
+                isFull = false;
+                return false;
+            }
+        });
+        trHtml += '<td id="'+dataId+'">\n' +
+            '<span><button class="btn btn-primary btn-sm handle" type="view">查看</button></span>\n' +
+            '<span><button class="btn btn-danger btn-sm handle" type="command">指挥</button></span>\n' +
+            '</td>\n' +
+            '</tr>';
+        if(isFull){
+            $('#addAsjModal').modal('hide');
+            $('#tips').text('');
+            $('#ajsTbody').append(trHtml);
+            tabelData[dataId] = trData;
+            localStorage.setItem('qzldData',JSON.stringify({dataId:dataId,trData:trData}));
+            console.log(tabelData);
+        }
+    });
+    //查看
+    $('#ajsTbody').off('click.handle').on('click.handle', '.handle', function () {
+        var $this = $(this);
+        var thisType = $this.attr('type');
+        var dataId = $this.parent().parent().attr('id');
+        var data = tabelData[dataId];
+        console.log(data);
+        $('#zhRwms').text(data.rwms);
+        $('#zhRwbt').text(data.rwbt);
+        $('#zhCjsj').text(data.cjsj);
+        $('#zhModal').modal('show');
+    });
+
+    function initTableData(data) {
+        console.log(data);
+
+        if(data){
+            var trHtml = '<tr>';
+            var dataId = data.dataId;
+            var trData = data.trData;
+            tabelData[dataId] = trData;
+            for(var k in trData){
+                if(k == 'rwms'){
+                    trHtml += '';
+                }else{
+                    trHtml += '<td>'+trData[k]+'</td>';
+                }
+            }
+            trHtml += '<td id="'+dataId+'">\n' +
+                '<span><button class="btn btn-primary btn-sm handle" type="view">查看</button></span>\n' +
+                '<span><button class="btn btn-danger btn-sm handle" type="command">指挥</button></span>\n' +
+                '</td>\n' +
+                '</tr>';
+            $('#ajsTbody').append(trHtml);
+        }
+    }
+</script>
+</html>

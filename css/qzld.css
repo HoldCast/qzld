@@ -1,0 +1,50 @@
+
+.modal-body .handle .left-content{
+    width:240px;
+    height:100%;
+    font-size:13px;
+    margin-right: 5px;
+}
+.modal-body .handle .left-content .item.dqczdw{
+    padding-top:5px;
+    border-top:1px dotted #ccc;
+}
+.modal-body .handle .left-content .item{
+    margin-bottom:10px;
+}
+
+.modal-body .handle .right-content{
+    width:820px;
+    border-left: 1px dashed #ccc;
+}
+.right-content label{
+    cursor: pointer;
+}
+.right-content .panel-item{
+    margin: 0 0 8px 15px;
+    min-height: 100px;
+    background: #fdfdfd;
+    padding: 6px;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px #e8e7e7;
+}
+
+.right-content .panel-item .title{
+    font-size:13px;
+    color: #3677b1;
+    border-bottom: solid #ccc 1px;
+    padding-bottom: 2px;
+}
+.right-content .panel-item .content {}
+.right-content .panel-item .content .item{
+    margin: 5px 0;
+    font-size:13px;
+}
+.right-content .panel-item .content .item input[type=checkbox]{
+    vertical-align: top;
+}
+.right-content .panel-item .content .item span{
+    display: inline-block;
+    width: 110px;
+    margin-right:5px;
+}
