@@ -1,0 +1,28 @@
+
+<!--确认退出-->
+<div class="modal fade bs-example-modal-sm" id="logoutModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">退出确认</h4>
+            </div>
+            <div class="modal-body">
+                <h4>确认退出系统吗?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" id="logoutConfirm">退出</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //注销退出
+    $('#logoutConfirm').off('click').on('click',function () {
+        localStorage.loginStatus = '0';
+        location.href = 'login.html';
+    });
+</script>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<head>
+    <title>党建管理中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <link rel="icon" href="../images/favicon2.ico">
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Custom CSS -->
+    <link href="../assets/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="../assets/css/style-responsive.css" rel="stylesheet"/>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="../assets/css/font.css" type="text/css"/>
+    <link href="../assets/css/font-awesome.css" rel="stylesheet">
+    <!-- self -->
+    <link rel="stylesheet" href="../css/common.css?v=1.0">
+    <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
+</head>
+<body style="background:#f9f9f9;">
+<section id="container">
+    <!--顶部-->
+    <header class="header fixed-top clearfix" id="commonHeader"></header>
+    <!--左边菜单-->
+    <aside>
+        <div id="sidebar" class="nav-collapse">
+            <div class="leftside-navigation">
+                <ul class="sidebar-menu" id="nav-accordion"></ul>
+            </div>
+        </div>
+    </aside>
+    <!--右边内容-->
+    <section id="main-content">
+        <section class="wrapper" id="wrapper">
+            <h3 class="main-title" id="mainTitle">用户管理</h3>
+            <div>
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户账号</th>
+                        <th>用户名称</th>
+                        <th>登记时间</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                    <tr data-expanded="true">
+                        <td>011</td>
+                        <td>admin</td>
+                        <td>管理员</td>
+                        <td>2017-12-31</td>
+                        <td>
+                            <span><button class="btn btn-default btn-sm edit-user">编辑</button></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>012</td>
+                        <td>092513</td>
+                        <td>张少华</td>
+                        <td>2017-12-31</td>
+                        <td>
+                            <span><button class="btn btn-default btn-sm edit-user">编辑</button></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>013</td>
+                        <td>092514</td>
+                        <td>刘一鸣</td>
+                        <td>2017-12-21</td>
+                        <td>
+                            <span><button class="btn btn-default btn-sm edit-user">编辑</button></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-5 text-center">
+                        <small class="text-muted inline m-t-sm m-b-sm">
+                            显示 1 到 10 条数据，总共 31 条。
+                        </small>
+                    </div>
+                    <div class="col-sm-7 text-right text-center-xs">
+                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                            <li><a href="" class="active">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li>
+                            <li><a href="">4</a></li>
+                            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </section>
+</section>
+<!--用户信息-->
+<div class="modal fade bs-example-modal-lg" id="userInfoModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="zzjgForm">
+                    <div class="form-group">
+                        <label for="yhmc" class="col-sm-2 control-label">用户名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control val" name="yhmc" id="yhmc" placeholder="党支部名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="yhzh" class="col-sm-2 control-label">用户账号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control val" name="yhzh" id="yhzh" placeholder="党支部名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">账号密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control val" id="password" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2" class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control val" id="password2" name="password2">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="saveUserInfo"><span class="module-name">保存</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer"></div>
+</body>
+<script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
+<script src="../js/menu-config.js?v=1.0"></script>
+<script src="../js/function.js?v=1.0"></script>
+<script src="../js/common2.js?v=1.0"></script>
+<script src="../assets/bootstrap/bootstrap.js"></script>
+<script src="../assets/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="../assets/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../assets/bootstrap/jquery.dcjqaccordion.2.7.js"></script>
+<script src="../assets/bootstrap/jquery.scrollTo.js"></script>
+<script src="../assets/bootstrap/scripts.js"></script>
+<script src="../assets/bootstrap/jquery.slimscroll.js"></script>
+<script src="../assets/bootstrap/jquery.nicescroll.js"></script>
+<script src="../assets/bootstrap/raphael-min.js"></script>
+<script src="../assets/bootstrap/morris.js"></script>
+<script src="../js/user.js"></script>
+</html>
