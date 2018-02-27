@@ -1,0 +1,79 @@
+/*组织机构样式*/
+.jgsz{
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+}
+.jgsz .left-tree{
+    width: 200px;
+    min-height: 600px;
+    border-right: 1px #ccc dashed;
+}
+.jgsz .left-tree .title{
+    text-align: center;
+    margin:28px 0 15px 0;
+    height:57px;
+    line-height: 57px;
+    font-size: 20px;
+    color: #000000;
+    background-color: #ddede0;
+    border-color: #ddede0 ! important;
+}
+.jgsz .right-content{
+    width: calc(100% - 200px);
+    matgin:auto;
+}
+.jgsz .right-content .topo{
+    text-align: center;
+    margin: 30px 20px 0 20px;
+    position: relative;
+    height: 125px;
+    border-bottom: solid #0B61A4 5px;
+}
+.jgsz .right-content .topo .title-word{
+    font-size: 28px;
+}
+.jgsz .right-content .topo .line{
+    position: absolute;
+    bottom:0;
+    left: 50%;
+    height: 80px;
+    width: 5px;
+    background: #0B61A4;
+}
+.jgsz .right-content .topo .sub-dw{
+    font-size:20px;
+    position: absolute;
+    top:200px;
+    height: 100px;
+    /*width: 100%;*/
+}
+.jgsz .right-content .topo .sub-dw .sub-dw-item{
+    position: relative;
+    margin: 0 15px;
+
+}
+.jgsz .right-content .topo .sub-dw .sub-dw-item .sub-line{
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    height: 80px;
+    width: 5px;
+    background: #0B61A4;
+}
+.jgsz .right-content table span.cz{
+    cursor: pointer;
+}
+
+
+.ztree *{
+    font-size: 16px !important;
+}
+.ztree ul.level0{
+    margin-top: 5px;
+}
+
+.ztree .level2{
+    margin: 2px 0;
+}
+
