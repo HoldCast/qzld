@@ -1,4 +1,30 @@
-
+.user-info{
+    font-size:14px;
+    width:320px;
+    color: #eee;
+    height: 80px;
+    line-height: 80px;
+    position: relative;
+}
+.user-info.user-info-btn{
+    text-align:center;
+    width:70px;
+    font-size: 22px;
+}
+.user-info.user-info-btn span{
+    cursor: pointer
+}
+.user-info.user-info-btn .msg-count{
+    font-size: 12px;
+    position: absolute;
+    top:20px;right:10px;
+    min-width:20px;
+    height: 20px;
+    line-height: 20px;
+    background:red;
+    display: inline-block;
+    border-radius: 10px;
+}
 .modal-body .handle .left-content{
     width:240px;
     height:100%;

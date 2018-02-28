@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        body,html{
+            padding:0;margin: 0;
+        }
+        html{
+            background: url("images/loginbg.png") no-repeat;
+            width:100%;
+            height:100%;
+            background-size:cover;
+        }
+        .title{
+            height:60px;
+            line-height: 60px;
+            width:100%;
+            color:#fff;
+            border-bottom: 1px solid #ccc;
+            font-size: 25px;
+            /*letter-spacing:1px;*/
+        }
+        .title img{
+            width: 40px;
+            height:40px;
+            margin:-5px 0 0 15px;
+        }
+        .login{
+            border-radius: 2px;
+            box-shadow: 0 0px 10px #9c9c9c;
+            width: 360px;
+            height: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            opacity: 0.95;
+            padding:15px 25px;
+        }
+        .login .word{
+            height:50px;
+            line-height: 50px;
+            font-size: 18px;
+            color: #373D41;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login .user input{
+            height: 30px;
+            line-height: 30px;
+            width: 352px;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            font-size: 13px;
+            padding-left: 5px;
+            outline: none;
+        }
+        .login .user input:hover{
+            border: 1px solid #1eb7d2;
+        }
+        .login .login-btn{
+            width: 360px;
+            height:40px;
+            line-height: 40px;
+            background-color: #1eb7d2;
+            cursor: pointer;
+            color:#fff;
+            text-align: center;
+            margin-top:25px;
+            border-radius: 3px;
+            letter-spacing:2px
+        }
+        .login .login-btn:hover{
+            background-color: #1f9eba;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <img src="images/logo.png" alt="">
+        <span>云南公安指挥调度平台 | 系统登录</span>
+    </div>
+    <div class="login">
+        <div class="word">账号登录</div>
+        <div class="user">
+            <input type="text" id="user" value="user1" placeholder="登录账号">
+        </div>
+        <div class="user password">
+            <input type="password" value="1234567890" placeholder="登录密码">
+        </div>
+        <div class="login-btn" onclick="login()">登录</div>
+        <div class="tips" id="tips" style="margin-top:5px;"></div>
+    </div>
+    <script>
+        function login() {
+            var user = document.getElementById('user').value;
+            if(user == 'user1' || user == 'user2' || user == 'user3' ){
+                localStorage.setItem('user',user);
+                location.href = 'html/qzld.html?pageType=qzld';
+            }else{
+                document.getElementById('tips').innerHTML = '用户不存在!'
+            }
+        }
+    </script>
+</body>
+</html>
