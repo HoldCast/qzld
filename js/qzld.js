@@ -198,8 +198,8 @@ function btnHandle(user) {
             }
         });
         trHtml += '<td id="'+dataId+'">\n' +
-            '<span><button class="btn btn-primary btn-sm handle view" type="view">查看</button></span>\n' +
-            '<span><button class="btn btn-danger btn-sm handle command" type="command">指挥</button></span>\n' +
+            '<span><button class="btn btn-primary btn-xs handle view" type="view">查看</button></span>\n' +
+            '<span><button class="btn btn-danger btn-xs handle command" type="command">下达指令</button></span>\n' +
             '</td>\n' +
             '</tr>';
         if(isFull){
@@ -211,7 +211,7 @@ function btnHandle(user) {
             console.log(tabelData);
         }
     });
-    //查看,指挥,反馈
+    //查看,下达指令,反馈
     $('#ajsTbody').off('click.handle').on('click.handle', '.handle', function () {
         var $this = $(this);
         var thisType = $this.attr('type');
@@ -228,6 +228,12 @@ function btnHandle(user) {
         //反馈
         if(thisType == 'feedback'){
             $('#zhModal3').modal('show');
+            $('#submitFk').click(function () {
+                $('#tips23').text('反馈成功!');
+                setTimeout(function () {
+                    $('#zhModal3').modal('hide');
+                },600);
+            })
         }
         //查看
         else if(thisType == 'view'){
@@ -236,7 +242,7 @@ function btnHandle(user) {
             $('#dqczdw').hide();
             $('#modalTitle222').show();
         }
-        //指挥
+        //下达指令
         else if(thisType == 'command'){
             $('#commandHandle,#dqczdw,#modalTitle22').show();
             if(user == 'user1'){
@@ -299,7 +305,7 @@ function btnHandle(user) {
                 $('#zhModal2').modal('hide');
             },600);
         }else{
-            $('#tips23').text('请填写指令内容!');
+            $('#tips22').text('请填写指令内容!');
         }
     });
     //newMsgModal
@@ -322,14 +328,14 @@ function judgeUser(user) {
     else if(user == 'user2'){
         $('#userName').text('刘星宇');
         $('#levelName').text('五华区分局指挥中心');
-        $('#addRdjjfz').hide();
+        $('#addRdjjfz,#addJqrw').hide();
         $('#commandLevel').text('下达二级指令');
-        $('.feedback').hide();
+        //$('.feedback').hide();
     }
     else if(user == 'user3'){
         $('#userName').text('张益阳');
         $('#levelName').text('红山派出所');
-        $('#addRdjjfz').hide();
+        $('#addRdjjfz,#addJqrw').hide();
         $('#commandLevel').text('下达二级指令');
         $('.command').hide();
     }
@@ -352,9 +358,9 @@ function initTableData(data) {
             }
         }
         trHtml += '<td id="'+dataId+'">\n' +
-            '<span><button class="btn btn-primary btn-sm handle view" type="view">查看</button></span>\n' +
-            '<span><button class="btn btn-danger btn-sm handle command" type="command">指挥</button></span>\n' +
-            '<span><button class="btn btn-primary btn-sm handle feedback" type="feedback">反馈</button></span>\n' +
+            '<span><button class="btn btn-primary btn-xs handle view" type="view">查看</button></span>\n' +
+            '<span><button class="btn btn-primary btn-xs handle feedback" type="feedback">反馈</button></span>\n' +
+            '<span><button class="btn btn-danger btn-xs handle command" type="command">下达指令</button></span>\n' +
             '</td>\n' +
             '</tr>';
         $('#ajsTbody').append(trHtml);

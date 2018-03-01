@@ -67,9 +67,13 @@
             <!--<h3 class="main-title" id="mainTitle">情指联动</h3>-->
             <div>
                 <div class="col-sm-5 m-b-xs">
-                    <button id="addRdjjfz" class="btn btn-sm btn-primary" data-toggle="modal"
-                            data-target="#addAsjModal">
-                        <i class="icon-plus"></i> 新增
+                    <button id="addRdjjfz" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addAsjModal">
+                        <i class="icon-plus"></i>
+                        <span>新增任务</span>
+                    </button>
+                    <button id="addJqrw" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#jqrwModal">
+                        <i class="icon-plus"></i>
+                        <span>警情任务</span>
                     </button>
                 </div>
                 <div class="col-sm-4 text-left">
@@ -119,7 +123,7 @@
     </section>
 </section>
 
-<!-- 新增案事件 -->
+<!-- 新增任务 -->
 <div class="modal fade bs-example-modal-lg" id="addAsjModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document" style="width:600px;">
@@ -129,7 +133,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modalTitle">
                     <i class="icon-plus"></i>
-                    新增案事件
+                    新增任务
                 </h4>
             </div>
             <div class="modal-body">
@@ -175,6 +179,28 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+<!-- 警情任务 -->
+<div class="modal fade bs-example-modal-lg" id="jqrwModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="">
+                    警情任务分解
+                </h4>
+            </div>
+            <div class="modal-body">
+                <h4>通过分析警情信息来下发的任务 ... </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -286,6 +312,48 @@
                             </div>
                         </div>
                         <div class="panel-item">
+                            <div class="title">
+                                <label>
+                                    <input type="checkbox" id="">
+                                    <span>其他机动组织(可单独配置机动组织和组织成员)</span>
+                                </label>
+                            </div>
+                            <div class="content clearfix" id="">
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="">
+                                    <span>盗抢应急分队</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="">
+                                    <span>诈骗应急分队</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="">
+                                    <span>何队长临时分队</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>其他应急分队1</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>其他应急分队2</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>其他应急分队3</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox">
+                                    <span>其他应急分队4</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox">
+                                    <span>其他应急分队5</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="panel-item">
                             <div class="form-group modal-form type1">
                                 <div class="form-item1">
                                     <span class="pre">协作标题</span>
@@ -383,6 +451,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="text-align:center;font-size:20px;color:red;">
+                                注：实际应用中，只展示当前级别及以下级别的数据信息！
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -457,6 +528,48 @@
                                 <label class="pull-left item">
                                     <input type="checkbox" mark="">
                                     <span>派出所6</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="panel-item">
+                            <div class="title">
+                                <label>
+                                    <input type="checkbox" id="">
+                                    <span>街面力量</span>
+                                </label>
+                            </div>
+                            <div class="content clearfix" id="">
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="">
+                                    <span>彭勇</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="">
+                                    <span>五华20号车</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="">
+                                    <span>肯德基暗哨岗</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>接龙路口移动警亭</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>其他</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>其他</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox">
+                                    <span>其他</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox">
+                                    <span>其他</span>
                                 </label>
                             </div>
                         </div>
@@ -543,9 +656,9 @@
                                     <span class="pre">添加附件</span>
                                     <input value="犯罪嫌疑人影像.jpg" readonly type="text" style="width:550px;" name="xgfj">
                                 </div>
-                                <div class="tips" id="tips23"></div>
                             </div>
                         </div>
+                        <div class="tips" id="tips23"></div>
                     </div>
                 </div>
             </div>
