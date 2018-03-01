@@ -28,14 +28,13 @@
                 <span>云南公安指挥调度平台</span>
             </a>
         </div>
-
         <div class="top-nav clearfix">
             <div class="pull-right user-info user-info-btn">
                 <span data-toggle="modal" data-target="#logoutModal">
                     <i class="icon-off"></i>
                 </span>
             </div>
-            <div class="pull-right user-info user-info-btn">
+            <div class="pull-right user-info user-info-btn" id="newMsg">
                 <span>
                     <i class="icon-envelope"></i>
                 </span>
@@ -156,7 +155,7 @@
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">创建时间</span>
-                            <input type="text" value="2018-03-06" style="width:400px;" name="cjsj" class="form_date">
+                            <input type="text" value="2018-03-06 12:08:36" style="width:400px;" name="cjsj" class="form_date">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">发起单位</span>
@@ -179,7 +178,31 @@
     </div>
 </div>
 
-<!-- 指挥：下达指令 -->
+<div class="modal fade bs-example-modal-lg" id="newMsgModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <i class="icon-envelope-alt"></i>
+                    <span>新消息提醒</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom"><b>消息类型：</b>反馈信息</div>
+                <div><b>消息内容：</b>经我所排查，自3月1日以来辖区内共有入室盗窃24起，其中技术性开锁入室5起，符合排查条件中技术性开锁特征，目前案件仍在破获中，已经整理在上报文件中。其中恒大置地案件中小区监控拍摄到犯罪嫌疑人影像（如附件所示），技侦大队正在采用技侦手段分析嫌疑人身份。</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="msgConfirm">确认签收</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 指挥：下达一级指令 -->
 <div class="modal fade bs-example-modal-lg" id="zhModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document" style="width:1100px;">
@@ -187,10 +210,14 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalTitle">
-                    <i class=" icon-flag"></i>
+                <h4 class="modal-title" id="modalTitle22">
+                    <i class="icon-flag"></i>
                     指挥:
                     <span id="commandLevel">下达一级指令</span>
+                </h4>
+                <h4 class="modal-title" id="modalTitle222">
+                    <i class="icon-sitemap"></i>
+                    <span>任务进展</span>
                 </h4>
             </div>
             <div class="modal-body">
@@ -200,10 +227,10 @@
                         <div class="item">任务标题：<span id="zhRwbt"></span></div>
                         <div class="item">创建时间：<span id="zhCjsj"></span></div>
                         <div class="item">任务内容：<span id="zhRwms"></span></div>
-                        <div class="item dqczdw">当前处置单位：<b id="zhDqczdw">昆明市局指挥中心</b></div>
+                        <div class="item dqczdw" id="dqczdw">当前处置单位：<b id="zhDqczdw">昆明市局指挥中心</b></div>
                     </div>
                     <!--右边操作-->
-                    <div class="pull-left right-content">
+                    <div class="pull-left right-content" id="commandHandle">
                         <div class="panel-item">
                             <div class="title">
                                 <label>
@@ -266,7 +293,8 @@
                                 </div>
                                 <div class="form-item1">
                                     <span class="pre">协作要求</span>
-                                    <textarea name="xzyq" id="xzyq" style="width:550px;height:80px;">各单位排查自己处理的警情中有哪些关于入室盗窃的警情，是否有技术手段拆破锁的迹象，可参照下发的现场锁具被开启照片对照</textarea>
+                                    <textarea name="xzyq" id="xzyq" style="width:550px;height:80px;">1、近期有无在查类似入室盗窃事件
+2、近期有无破获入室盗窃事件及嫌疑人信息并上报</textarea>
                                 </div>
                                 <div class="form-item1">
                                     <span class="pre">相关附件</span>
@@ -276,23 +304,254 @@
                                         生成默认指令
                                     </button>
                                 </div>
-                                <div class="tips" id="tips2"></div>
                             </div>
                         </div>
                         <div class="panel-item">
                             <div class="form-group modal-form">
                                 <div class="form-item1">
                                     <textarea name="zlnr" id="zlnr" style="width:645px;height:120px;"></textarea>
-                                    <button class="btn btn-danger btn-sm ladda-button" data-style="expand-left"
+                                    <button id="runCommand" class="btn btn-danger btn-sm ladda-button" data-style="expand-left"
                                             style="position:relative;top:-10px;text-align:center;margin-left:15px;width:90px">
                                         下达指令
                                     </button>
                                 </div>
                             </div>
-
+                            <div class="tips" id="tips2"></div>
+                        </div>
+                    </div>
+                    <div class="pull-left right-content" id="commandView">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#taskView" aria-controls="taskView" role="tab" data-toggle="tab">任务分解图</a></li>
+                                <li role="presentation"><a href="#taskList" aria-controls="taskList" role="tab" data-toggle="tab">任务列表</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="taskView">
+                                    <div class="tree-view" id="echartsTree" style="width:800px;height:500px;"></div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="taskList">
+                                    <div class="tree-view" style="width:800px;height:500px;">
+                                        <table class="table table-striped table-hover table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>时间节点</th>
+                                                <th>任务描述</th>
+                                                <th>相关附件</th>
+                                                <th>指令下达人</th>
+                                                <th>操作</th>
+                                            </thead>
+                                            <tbody id="ajsTbody2">
+                                                <tr>
+                                                    <td>2018-03-16 08:16:39</td>
+                                                    <td>昆明市局指挥中心：五华、西山协查任务</td>
+                                                    <td><a href="javascript:;">查看</a></td>
+                                                    <td>吕建然</td>
+                                                    <td><button class="btn btn-xs btn-primary">详情</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2018-03-16 10:14:15</td>
+                                                    <td>五华分局：令虹山派出所清查盗窃情况</td>
+                                                    <td><a href="javascript:;">查看</a></td>
+                                                    <td>刘星宇</td>
+                                                    <td><button class="btn btn-xs btn-primary">详情</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2018-03-17 11:13:25</td>
+                                                    <td>西山分局：令高科派出所清查盗窃情况</td>
+                                                    <td><a href="javascript:;">查看</a></td>
+                                                    <td>张兴庄</td>
+                                                    <td><button class="btn btn-xs btn-primary">详情</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2018-03-17 21:15:08</td>
+                                                    <td>虹山派出所：盗窃情况清查信息反馈</td>
+                                                    <td><a href="javascript:;">查看</a></td>
+                                                    <td>张益红</td>
+                                                    <td><button class="btn btn-xs btn-primary">详情</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2018-03-17 22:01:32</td>
+                                                    <td>高科派出所：盗窃情况清查信息反馈</td>
+                                                    <td><a href="javascript:;">查看</a></td>
+                                                    <td>孙华</td>
+                                                    <td><button class="btn btn-xs btn-primary">详情</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 指挥：下达二级指令 -->
+<div class="modal fade bs-example-modal-lg" id="zhModal2" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:1100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle2">
+                    <i class=" icon-flag"></i>
+                    指挥:
+                    <span id="commandLevel2">下达二级指令</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix handle">
+                    <!--左边文字信息-->
+                    <div class="pull-left left-content">
+                        <div class="item">任务标题：<span id="zhRwbt2"></span></div>
+                        <div class="item">创建时间：<span id="zhCjsj2"></span></div>
+                        <div class="item">任务内容：<span id="zhRwms2"></span></div>
+                        <div class="item dqczdw">上级指令：<span id="zhXdzl2"></span></div>
+                        <div class="item dqczdw">
+                            <div>附件信息：<span id="fjxx2"></span></div>
+                            <div>1、<a href="javascript:;">恒大置地B3-403房.jpg</a></div>
+                            <div>2、<a href="javascript:;">万科5号D区-602.jpg</a></div>
+                        </div>
+                        <div class="item dqczdw">当前处置单位：<b id="zhDqczdw2">五华区分局</b></div>
+                    </div>
+                    <!--右边操作-->
+                    <div class="pull-left right-content">
+                        <div class="panel-item">
+                            <div class="title">
+                                <label>
+                                    <input type="checkbox" id="allGajgCheck2">
+                                    <span>派出所</span>
+                                </label>
+                            </div>
+                            <div class="content clearfix" id="qxgajg2">
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="hspcs">
+                                    <span>虹山派出所</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="hypcs">
+                                    <span>海源派出所</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" checked mark="ckpcs">
+                                    <span>厂口派出所</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="psc3">
+                                    <span>派出所3</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>派出所4</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>派出所5</span>
+                                </label>
+                                <label class="pull-left item">
+                                    <input type="checkbox" mark="">
+                                    <span>派出所6</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="panel-item">
+                            <div class="form-group modal-form type1">
+                                <div class="form-item1">
+                                    <span class="pre">协作标题</span>
+                                    <input type="text" value="五华区入室盗窃案协查" style="width:550px;" name="xzbt">
+                                </div>
+                                <div class="form-item1">
+                                    <span class="pre">协作要求</span>
+                                    <textarea name="xzyq" id="xzyq2" style="width:550px;height:80px;">各所请清查本辖区内入室盗窃警情，将技术性开门入室盗窃的警情信息，现场痕迹可参考附件中“恒大置地B3-403房.jpg”的附件，追查情况在3月15日前上报到市局。</textarea>
+                                </div>
+                                <div class="form-item1">
+                                    <span class="pre">添加附件</span>
+                                    <input type="file" multiple style="width:550px;background: #fff;display:inline;"
+                                           name="xgfj">
+                                    <button id="createCommand2" class="btn btn-primary btn-sm" style="margin-left:15px;">
+                                        生成默认指令
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-item">
+                            <div class="form-group modal-form">
+                                <div class="form-item1">
+                                    <textarea name="zlnr" id="zlnr2" style="width:645px;height:120px;"></textarea>
+                                    <button id="runCommand2" class="btn btn-danger btn-sm ladda-button" data-style="expand-left"
+                                            style="position:relative;top:-10px;text-align:center;margin-left:15px;width:90px">
+                                        下达指令
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tips" id="tips22"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 指令反馈 -->
+<div class="modal fade bs-example-modal-lg" id="zhModal3" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:1100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle3">
+                    <i class=" icon-comments"></i>
+                    反馈
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix handle">
+                    <!--左边文字信息-->
+                    <div class="pull-left left-content">
+                        <div class="item">任务标题：<span id="zhRwbt3"></span></div>
+                        <div class="item">创建时间：<span id="zhCjsj3"></span></div>
+                        <div class="item">任务内容：<span id="zhRwms3"></span></div>
+                        <div class="item dqczdw">上级指令：<span id="zhXdzl3"></span></div>
+                        <div class="item dqczdw">
+                            <div>附件信息：<span id="fjxx3"></span></div>
+                            <div>1、<a href="javascript:;">恒大置地B3-403房.jpg</a></div>
+                            <div>2、<a href="javascript:;">万科5号D区-602.jpg</a></div>
+                        </div>
+                        <div class="item dqczdw">当前处置单位：<b id="zhDqczdw3">虹山派出所</b></div>
+                    </div>
+                    <!--右边操作-->
+                    <div class="pull-left right-content" style="height:400px;">
+                        <div class="panel-item">
+                            <div class="form-group modal-form type1">
+                                <div class="form-item1">
+                                    <span class="pre">反馈单位</span>
+                                    <input type="text" value="虹山派出所" style="width:550px;" name="xzbt">
+                                </div>
+                                <div class="form-item1">
+                                    <span class="pre">处理情况</span>
+                                    <textarea name="xzyq" id="xzyq2" style="width:550px;height:200px;">经我所排查，自3月1日以来辖区内共有入室盗窃24起，其中技术性开锁入室5起，符合排查条件中技术性开锁特征，目前案件仍在破获中，已经整理在上报文件中。其中恒大置地案件中小区监控拍摄到犯罪嫌疑人影像（如附件所示），技侦大队正在采用技侦手段分析嫌疑人身份。</textarea>
+                                </div>
+                                <div class="form-item1">
+                                    <span class="pre">添加附件</span>
+                                    <input value="犯罪嫌疑人影像.jpg" readonly type="text" style="width:550px;" name="xgfj">
+                                </div>
+                                <div class="tips" id="tips23"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submitFk">提交反馈</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>
     </div>
@@ -314,5 +573,7 @@
 <script src="../assets/bootstrap/jquery.nicescroll.js"></script>
 <script src="../assets/bootstrap/raphael-min.js"></script>
 <script src="../assets/bootstrap/morris.js"></script>
-<script src="../js/qzld.js?v=1.1"></script>
+<!--<script src="../assets/echarts2.0/echarts.js"></script>-->
+<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src="../js/qzld.js?v=1.0.0.0"></script>
 </html>

@@ -63,14 +63,14 @@ function leftMenuClass() {
 //时间控件处理
 function dateTime() {
     $('.form_date').datetimepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyy-mm-dd hh:ii:ss',
         language:  'zh-CN',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,
-        minView: 2,
+        //minView: 3,
         forceParse: 0
     });
 }

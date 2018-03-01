@@ -1,7 +1,10 @@
 //表格数据
 var tabelData = {};
+
 var qzldData = JSON.parse(localStorage.getItem('qzldData'));
 var user = localStorage.getItem('user');
+var ZLNR1 = localStorage.getItem('zlnr1');
+var ZLNR2 = localStorage.getItem('zlnr2');
 //分局数据
 var fjData = {
     whfj: {name: '五华分局', data: {}},
@@ -9,16 +12,168 @@ var fjData = {
     ylxj: {name: '宜良县局', data: {}},
     slxj: {name: '石林县局', data: {}}
 };
+//派出所数据
+var pcsData = {
+    hspcs: {name: '红山派出所', data: {}},
+    hypcs: {name: '海源派出所', data: {}},
+    ckpcs: {name: '厂口派出所', data: {}}
+
+};
 $(function () {
     //初始化表格
     initTableData(qzldData);
     //判断用户级别
     judgeUser(user);
     //点击事件
-    btnHandle();
+    btnHandle(user);
+    //echartsTree
+    echartsTree();
 });
 
-function btnHandle() {
+function echartsTree() {
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('echartsTree'));
+
+    option = {
+        title : {
+            //text: '任务分解图',
+            //subtext: '线、节点样式'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b}"
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : false,
+        series : [
+            {
+                name:'任务分解图',
+                type:'tree',
+                orient: 'vertical',  // vertical horizontal
+                rootLocation: {x: 'center', y: 60}, // 根节点位置  {x: 'center',y: 10}
+                nodePadding: 20,
+                symbol: 'rectangle',
+                symbolSize: 50,
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            position: 'inside',
+                            textStyle: {
+                                color: '#ffffff',
+                                fontSize: 14
+                                //fontWeight:  'bolder'
+                            }
+                        },
+                        lineStyle: {
+                            color: '#5c5c5c',
+                            width: 2,
+                            type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+                        }
+                    },
+                    emphasis: {
+                        label: {
+                            show: true
+                        }
+                    }
+                },
+                data: [
+                    {
+                        name: '昆明市公安局',
+                        symbolSize: [150, 50],
+                        symbol: 'rectangle',
+                        formatter: "{b}",
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        children: [
+                            {
+                                name: '五华分局',
+                                value: 0,
+                                symbolSize: [100, 40],
+                                children: [
+                                    {
+                                        name: '虹山派出所',
+                                        value: 4,
+                                        symbolSize: [100, 40],
+                                    },
+                                    {
+                                        name: '海源派出所',
+                                        value: 0,
+                                        symbolSize: [100, 40]
+                                    },
+                                    {
+                                        name: '海源派出所',
+                                        value: 14,
+                                        symbolSize: [100, 40]
+                                    }
+                                ]
+                            },
+                            {
+                                name: '西山分局',
+                                value: '50人',
+                                symbolSize: [100, 40],
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true
+                                        }
+
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: '高科派出所',
+                                        value: 20,
+                                        itemStyle: {
+                                            normal: {
+                                                label: {
+                                                    //show: false
+                                                }
+                                            }
+                                        },
+                                        symbolSize: [100, 40],
+                                    },
+                                    {
+                                        name: '前卫派出所',
+                                        value: 5,
+                                        symbolSize: [100, 40],
+                                        itemStyle: {
+                                            normal: {
+                                                label: {
+                                                    show: true
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+}
+
+function btnHandle(user) {
     //新增
     $('#addAjsBtn').off('click').on('click',function () {
         var dataId = 'id_' + (new Date()).getTime();
@@ -45,7 +200,6 @@ function btnHandle() {
         trHtml += '<td id="'+dataId+'">\n' +
             '<span><button class="btn btn-primary btn-sm handle view" type="view">查看</button></span>\n' +
             '<span><button class="btn btn-danger btn-sm handle command" type="command">指挥</button></span>\n' +
-            '<span><button class="btn btn-danger btn-sm handle feedback" type="feedback">指挥</button></span>\n' +
             '</td>\n' +
             '</tr>';
         if(isFull){
@@ -57,17 +211,40 @@ function btnHandle() {
             console.log(tabelData);
         }
     });
-    //查看
+    //查看,指挥,反馈
     $('#ajsTbody').off('click.handle').on('click.handle', '.handle', function () {
         var $this = $(this);
         var thisType = $this.attr('type');
         var dataId = $this.parent().parent().attr('id');
         var data = tabelData[dataId];
-        console.log(data);
-        $('#zhRwms').text(data.rwms);
-        $('#zhRwbt').text(data.rwbt);
-        $('#zhCjsj').text(data.cjsj);
-        $('#zhModal').modal('show');
+        $('#zhRwms,#zhRwms2,#zhRwms3').text(data.rwms);
+        $('#zhRwbt,#zhRwbt2,#zhRwbt3').text(data.rwbt);
+        $('#zhCjsj,#zhCjsj2,#zhCjsj3').text(data.cjsj);
+        $('#tips2,#tips23').text('');
+        $('#zhXdzl2').text(ZLNR1);
+        $('#zhXdzl3').text(ZLNR2);
+        $('#zhModal .right-content').hide();
+        $('#modalTitle22,#modalTitle222').hide();
+        //反馈
+        if(thisType == 'feedback'){
+            $('#zhModal3').modal('show');
+        }
+        //查看
+        else if(thisType == 'view'){
+            $('#zhModal').modal('show');
+            $('#commandView').show();
+            $('#dqczdw').hide();
+            $('#modalTitle222').show();
+        }
+        //指挥
+        else if(thisType == 'command'){
+            $('#commandHandle,#dqczdw,#modalTitle22').show();
+            if(user == 'user1'){
+                $('#zhModal').modal('show');
+            }else{
+                $('#zhModal2').modal('show');
+            }
+        }
     });
     //选中所有分县局
     $('#allGajgCheck').off('click').on('click', function () {
@@ -85,8 +262,54 @@ function btnHandle() {
         var qxgajgStr = qxgajg.join('、');
         var xzyq = $('#xzyq').val();
         console.log(qxgajgStr,xzyq);
-        $('#zlnr').val('令' + qxgajgStr + "：\n\t" + xzyq);
+        $('#zlnr').val('令' + qxgajgStr + "：\n" + xzyq);
     });
+    //生成指令2
+    $('#createCommand2').off('click').on('click',function () {
+        var qxgajg2 = [];
+        $('#qxgajg2 input:checked').each(function () {
+            var mark = $(this).attr('mark');
+            qxgajg2.push(pcsData[mark].name);
+        });
+        var qxgajgStr = qxgajg2.join('、');
+        var xzyq = $('#xzyq2').val();
+        console.log(qxgajgStr,xzyq);
+        $('#zlnr2').val('令' + qxgajgStr + "：\n" + xzyq);
+    });
+    //下达指令
+    $('#runCommand').off('click').on('click', function () {
+        var zlnr1 = $('#zlnr').val();
+        if(zlnr1){
+            localStorage.setItem('zlnr1',zlnr1);
+            $('#tips2').text('指令下达成功!');
+            setTimeout(function () {
+                $('#zhModal').modal('hide');
+            },600);
+        }else{
+            $('#tips2').text('请填写指令内容!');
+        }
+    });
+    //下达指令2
+    $('#runCommand2').off('click').on('click', function () {
+        var zlnr2 = $('#zlnr2').val();
+        if(zlnr2){
+            localStorage.setItem('zlnr2',zlnr2);
+            $('#tips22').text('指令下达成功!');
+            setTimeout(function () {
+                $('#zhModal2').modal('hide');
+            },600);
+        }else{
+            $('#tips23').text('请填写指令内容!');
+        }
+    });
+    //newMsgModal
+    $('#newMsg').off('click').on('click',function () {
+        $('#newMsgModal').modal('show');
+        $('#msgConfirm').click(function () {
+            $('#msgCount').hide();
+            $('#newMsgModal').modal('hide');
+        })
+    })
 }
 
 //判断用户级别
